@@ -53,7 +53,14 @@ private end-point which only specific or authenticated user can access ) so this
 
 so the moment when we add spring-security dependency into our spring project our whole project endpoint by-default get private by the spring-security . it means now only authenticated user 
 can access only those endpoints not by someone random person. so thats why we are using spring security in our spring project to make make private all the endpoints so that we can protect
-the data from whitelisting which is associated with that endpoints 
+the data from whitelisting which is associated with that endpoints.
+
+now after adding spring security dependency in our project . if we hit the same endpoint then we get 401 unauthorized in postman. it means now 
+this endpoint gets secured and due to adding spring security all whitelist api now become black listed or become private endpoints.
+
+// we donot have to add anything in application.properties file when we add spring security in our project
+
+and on browser if we hit this url http://localhost:8080/security/get then it will redirect to http://localhost:8080/login
 
 
 
