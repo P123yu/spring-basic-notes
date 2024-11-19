@@ -1,0 +1,60 @@
+
+
+// in application.properties file
+
+spring 
+  || ===> datasource
+            || ===> url      ===> jdbc:dbname://localhost:dbportno/projectdbname     ex: jdbc:mysql://localhost:3306/docker-mysql
+            || ===> username
+            || ===> password
+            || ===> driver-class-name   ===> com.dbname.jdbc.Driver      ex:com.mysql.cj.jdbc.Driver   => this is showing that which jdbc driver i am using to connect java to database. so
+                                                                        that java can interact with database . so here i am using mysql-jdbc-driver to connect java with mysql database
+
+spring 
+  || ===> jpa
+            || ===> show-sql=true                ==> this is used to show sql query on console whenever you perform any db operation
+            || ===> generate-ddl=true            ==> this is used to generate table automatically whenever our spring boot project run
+            || ===> hibernate.ddl-auto=update    ==> this is used to update the schema automatically if we change some feature in our codebase in future
+
+note: if from spring initializer if you add any db driver dependency in your project and if you forget to configure jdbc things related to that db in application.properties file then spring will give
+error. so whenever we add any db driver in our spring project we also have to write its application.properties file in our spring project.
+
+
+
+
+// what happen if we donot add spring security dependency into our spring project
+
+like take an example of our basic spring project where we add several dependency like spring-data-jpa,mysql-driver,spring-web,lombok  and just in controller we write a simple api endpoint
+like :-
+
+
+package com.security.basic.controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/security")
+public class UserController {
+
+    @GetMapping("/get")
+    public String message(){
+        return "this is message is not secured";
+    }
+}
+
+
+now from web-browser or any api-client if i hit this endpoint using url ==>   http://localhost:8080/security/get  then this will simply display the text message which we provide in return
+on the web-browser screen  ==> this is message is not secured
+
+here because this endpoint is whitelist (it means public which is open for all ) so any one can call this whitelist endpoint and get the result whatever is written inside that white-listed
+endpoint . but what happens if i want that only authenticated user can access that endpoint not any user. so for this behaviour we have to make that endpoint as blacklist endpoint (it means
+private end-point which only specific or authenticated user can access ) so this is achieved using spring-security dependency . 
+
+so the moment when we add spring-security dependency into our spring project our whole project endpoint by-default get private by the spring-security . it means now only authenticated user 
+can access only those endpoints not by someone random person. so thats why we are using spring security in our spring project to make make private all the endpoints so that we can protect
+the data from whitelisting which is associated with that endpoints 
+
+
+
+
